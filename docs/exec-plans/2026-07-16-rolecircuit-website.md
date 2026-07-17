@@ -64,6 +64,8 @@
 - 2026-07-16：完成全英文 copy、暖白浅色视觉、六项能力卡、输入/检查/输出细节和 operator model 区块。
 - 2026-07-16：通过英文-only 检查、`node --check script.js`、`git diff --check`；本地浏览器预览确认英文页面结构与资源均正常加载。
 - 2026-07-16：根据公司资料，将 OVRENI, LLC、Delaware LLC 和 Charlotte 注册地址加入页脚与 README。
+- 2026-07-17：本地提交 `0e941ab` 已创建；push 被 GitHub 拒绝，当前 SSH 身份 `Jaydccq` 没有 `hankchen1874-hub/RoleCircuit.github.io` 写权限。
+- 2026-07-17：创建 Cloudflare Pages 项目 `rolecircuit`，并将提交 `0e941ab` 的官网内容 direct deploy 到 production；部署 `4e751503` 成功，浏览器验证公开页面可加载。
 
 ## Key decisions
 
@@ -76,7 +78,8 @@
 
 - 没有真实截图和正式客户案例；界面示意数据需要后续替换。
 - 外部字体加载失败时会回退到本地系统字体；页面仍可阅读和操作。
+- GitHub push 当前阻塞在账号权限：需要用有仓库写权限的 GitHub 账号重新认证，或把 `Jaydccq` 加入仓库。
 
 ## Final outcome
 
-已完成 RoleCircuit 静态官网英文浅色改版，并补充 OVRENI, LLC 的法律主体信息与注册地址。页面采用纯 HTML/CSS/JS，不依赖构建步骤，可直接用于 GitHub Pages；已移除旧版首版介绍与邮箱 CTA。真实产品链接、Logo、截图与客户案例仍是正式发布前需要替换的内容。
+已完成 RoleCircuit 静态官网英文浅色改版，并补充 OVRENI, LLC 的法律主体信息与注册地址。页面采用纯 HTML/CSS/JS，不依赖构建步骤；Cloudflare Pages production 已成功部署到 `https://4e751503.rolecircuit.pages.dev/`。GitHub push 尚未完成，原因是当前 `Jaydccq` 身份没有目标仓库写权限。
