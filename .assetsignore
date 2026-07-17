@@ -1,0 +1,8 @@
+.git/
+.github/
+.agents/
+.codex/
+docs/
+README.md
+wrangler.toml
+.assetsignore
