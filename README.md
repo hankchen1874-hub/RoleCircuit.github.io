@@ -23,6 +23,10 @@ Then open `http://localhost:8000`.
 
 The website copy is based on the README, product-direction ADR, and architecture docs in `/Users/hongxichen/Desktop/auto-job`. Real product links, screenshots, and customer stories should be added before launch.
 
+## Cloudflare deployment
+
+Cloudflare Workers builds run `npx wrangler deploy`. The root `wrangler.toml` points Wrangler at the static asset directory, while `.assetsignore` keeps documentation and repository metadata out of the public asset set.
+
 ## Legal entity
 
 RoleCircuit is presented as a product by OVRENI, LLC, a Delaware LLC.
