@@ -5,259 +5,487 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="RoleCircuit is a local-first AI job-search runtime for discovering, evaluating, preparing, and tracking your next move."
+      content="RoleCircuit is your local AI job-search copilot — it finds the openings worth your time, tailors your documents, fills the forms, and keeps track. You make the final call."
     />
-    <meta name="theme-color" content="#f5f0e6" />
-    <title>RoleCircuit — A clearer route to your next right role</title>
+    <meta name="theme-color" content="#fafaf6" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='12.5' fill='%23fafaf6' stroke='%23141712' stroke-width='1.6'/%3E%3Ccircle cx='14' cy='14' r='4.5' fill='%2365a30d'/%3E%3Cpath d='M14 1.5v6M14 20.5v6M1.5 14h6M20.5 14h6' stroke='%2365a30d' stroke-width='1.6'/%3E%3C/svg%3E" />
+    <title>RoleCircuit — Stop scrolling. Start landing.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Syne:wght@600;700;800&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
     <script defer src="script.js"></script>
   </head>
   <body>
-    <div class="site-shell">
-      <header class="site-header">
-        <a class="brand" href="#top" aria-label="RoleCircuit home">
-          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span>Role<span class="brand-accent">Circuit</span></span>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+
+    <header class="site-header" id="site-header">
+      <a class="brand" href="#top" aria-label="RoleCircuit home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 28 28" width="26" height="26" fill="none">
+            <circle cx="14" cy="14" r="12.5" stroke="currentColor" stroke-width="1.6" />
+            <circle cx="14" cy="14" r="4.5" fill="#65a30d" />
+            <path d="M14 1.5v6M14 20.5v6M1.5 14h6M20.5 14h6" stroke="#65a30d" stroke-width="1.6" />
+          </svg>
+        </span>
+        <span class="brand-name">Role<span class="brand-accent">Circuit</span></span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation">
+        <a href="#how" data-spy="how">How it works</a>
+        <a href="#autofill" data-spy="autofill">Autofill</a>
+        <a href="#radar" data-spy="radar">Signal Radar</a>
+        <a href="#privacy" data-spy="privacy">Why private</a>
+        <a class="nav-button" href="https://github.com/hankchen1874-hub/RoleCircuit.github.io" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          GitHub <span aria-hidden="true">↗</span>
         </a>
+      </nav>
+    </header>
 
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
-          <span class="sr-only">Open navigation</span>
-          <span></span><span></span>
-        </button>
+    <main id="main">
+      <!-- ============ HERO ============ -->
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <canvas class="hero-canvas" id="circuit-canvas" aria-hidden="true"></canvas>
 
-        <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation">
-          <a href="#system">System</a>
-          <a href="#capabilities">Capabilities</a>
-          <a href="#workflow">Workflow</a>
-          <a href="#trust">Trust</a>
-          <a class="nav-button" href="https://github.com/hankchen1874-hub/RoleCircuit.github.io" target="_blank" rel="noreferrer">
-            Explore the repo <span aria-hidden="true">↗</span>
-          </a>
-        </nav>
-      </header>
-
-      <main id="top">
-        <section class="hero section-grid" aria-labelledby="hero-title">
+        <div class="hero-inner">
           <div class="hero-copy">
-            <div class="eyebrow reveal"><span class="pulse-dot"></span> local-first / AI job search runtime</div>
-            <h1 id="hero-title" class="reveal delay-1">A clearer route<br />to your next<br /><em>right role.</em></h1>
+            <div class="eyebrow reveal">
+              <span class="led" aria-hidden="true"></span>
+              <span class="mono">YOUR LOCAL AI JOB-SEARCH COPILOT</span>
+            </div>
+            <h1 id="hero-title" class="hero-title">
+              <span class="line"><span class="line-inner"><span class="word">Stop</span> <span class="word">scrolling.</span></span></span>
+              <span class="line"><span class="line-inner"><span class="word">Start</span> <span class="word accent">landing.</span></span></span>
+            </h1>
             <p class="hero-lede reveal delay-2">
-              RoleCircuit turns a scattered job search into a visible, reviewable system — from the first signal to the final application decision.
+              RoleCircuit finds the openings worth your time, tailors your documents, fills the
+              forms, and keeps track of it all — right on your own machine. You make the final call.
             </p>
             <div class="hero-actions reveal delay-3">
-              <a class="button button-primary" href="#workflow">See how it works <span aria-hidden="true">↓</span></a>
-              <a class="text-link" href="#trust">Read the trust model <span aria-hidden="true">↗</span></a>
+              <a class="button button-primary magnetic" href="#how">See how it works <span aria-hidden="true">↓</span></a>
+              <a class="button button-ghost magnetic" href="https://github.com/hankchen1874-hub/RoleCircuit.github.io" target="_blank" rel="noreferrer">Get it on GitHub <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="hero-chips reveal delay-3">
+              <span class="trust-chip"><i class="chip-dot"></i>100% local</span>
+              <span class="trust-chip"><i class="chip-dot"></i>No account needed</span>
+              <span class="trust-chip"><i class="chip-dot"></i>Open source · MIT</span>
             </div>
           </div>
 
-          <div class="hero-visual reveal delay-2" aria-label="RoleCircuit signal board interface preview">
-            <div class="orbit orbit-one"></div>
-            <div class="orbit orbit-two"></div>
-            <div class="visual-label label-top">ROLECIRCUIT / LIVE BOARD</div>
-            <div class="visual-label label-side">SIGNAL → DECISION → ACTION</div>
-            <div class="circuit-board">
+          <div class="hero-board reveal delay-2" aria-label="Preview of a RoleCircuit shortlist">
+            <div class="board card">
               <div class="board-topline">
-                <span class="board-brand"><span class="tiny-mark"></span> rolecircuit</span>
-                <span class="board-status"><i></i> system ready</span>
+                <span class="board-brand mono"><span class="tiny-dot"></span>YOUR SHORTLIST · TODAY</span>
+                <span class="board-leds" aria-hidden="true"><i class="led"></i><i class="led led-warm"></i></span>
               </div>
-              <div class="board-heading">
-                <div>
-                  <span class="mono-label">TODAY / 08:42</span>
-                  <h2>Signal board</h2>
+              <div class="board-target">
+                <span class="mono board-label">WATCHING FOR</span>
+                <span class="board-typing"><span id="typing-role"></span><span class="cursor-bar" aria-hidden="true"></span></span>
+              </div>
+              <div class="board-rows">
+                <div class="board-row">
+                  <div class="row-main">
+                    <strong>Senior Product Engineer</strong>
+                    <span class="row-co">Northstar Labs</span>
+                  </div>
+                  <p class="row-why">Matches your design-systems work — worth a look.</p>
                 </div>
-                <span class="board-filter">all lanes <b>⌄</b></span>
-              </div>
-              <div class="signal-row signal-featured">
-                <span class="signal-index">01</span>
-                <span class="signal-icon signal-icon-orange">↗</span>
-                <div class="signal-content"><strong>Applied AI Engineer</strong><small>Northstar Labs · new signal</small></div>
-                <span class="score score-high">92</span>
-              </div>
-              <div class="signal-row">
-                <span class="signal-index">02</span>
-                <span class="signal-icon signal-icon-lime">◇</span>
-                <div class="signal-content"><strong>Product Engineer</strong><small>Common Thread · 3h ago</small></div>
-                <span class="score">78</span>
-              </div>
-              <div class="signal-row">
-                <span class="signal-index">03</span>
-                <span class="signal-icon signal-icon-blue">⊙</span>
-                <div class="signal-content"><strong>Founding Engineer</strong><small>Signal House · reviewed</small></div>
-                <span class="score">71</span>
-              </div>
-              <div class="board-footer">
-                <span><b>14</b> jobs in orbit</span>
-                <span class="footer-arrow">view pipeline <span aria-hidden="true">→</span></span>
-              </div>
-            </div>
-            <div class="floating-card floating-note"><span class="mini-check">✓</span><span><b>Fit evidence found</b><small>3 strong matches in your CV</small></span></div>
-            <div class="floating-card floating-route"><span class="route-line"></span><span><b>Route is clear</b><small>next: review application</small></span></div>
-          </div>
-
-          <div class="hero-foot reveal delay-3">
-            <span class="hero-foot-label">A calm control surface for a noisy search</span>
-            <span class="scroll-cue"><span></span> scroll to explore</span>
-          </div>
-        </section>
-
-        <section class="manifesto band" aria-label="Product statement">
-          <div class="manifesto-mark">///</div>
-          <p>A job search should not feel like a black box.<br /><strong>It should be a system you can see, shape, and own.</strong></p>
-          <span class="manifesto-stamp">RC / 001</span>
-        </section>
-
-        <section class="section section-grid" id="system" aria-labelledby="system-title">
-          <div class="section-intro">
-            <div class="section-number">01 / THE SYSTEM</div>
-            <h2 id="system-title">Turn search noise<br />into a sequence.</h2>
-            <p>RoleCircuit does not make the decision for you. It connects the work before the decision, so every action has context.</p>
-          </div>
-          <div class="feature-stack">
-            <article class="feature-card feature-orange">
-              <div class="feature-meta"><span>01</span><span>DISCOVER</span></div>
-              <div class="feature-icon">⌁</div>
-              <h3>Find the signals worth your time</h3>
-              <p>Collect real openings from multiple sources, then filter by role, location, seniority, authorization, and the constraints that actually matter.</p>
-              <div class="feature-tags"><span>LinkedIn</span><span>Indeed</span><span>ATS boards</span></div>
-            </article>
-            <article class="feature-card feature-lime">
-              <div class="feature-meta"><span>02</span><span>UNDERSTAND</span></div>
-              <div class="feature-icon">◎</div>
-              <h3>Turn fit into evidence</h3>
-              <p>Place the job description and your CV in the same analysis lane. See strengths, gaps, risks, and the reasons behind a match score.</p>
-              <div class="feature-tags"><span>CV fit</span><span>Evidence</span><span>Score trace</span></div>
-            </article>
-            <article class="feature-card feature-blue">
-              <div class="feature-meta"><span>03</span><span>MOVE</span></div>
-              <div class="feature-icon">↳</div>
-              <h3>Make the next step lighter</h3>
-              <p>Generate tailored documents, map application forms, and keep every follow-up connected to the original opportunity.</p>
-              <div class="feature-tags"><span>Tailored docs</span><span>Autofill</span><span>Tracker</span></div>
-            </article>
-          </div>
-        </section>
-
-        <section class="capabilities-section section" id="capabilities" aria-labelledby="capabilities-title">
-          <div class="section-heading-row section-grid">
-            <div>
-              <div class="section-number">02 / CAPABILITIES</div>
-              <h2 id="capabilities-title">The parts that make<br /><span>the loop useful.</span></h2>
-            </div>
-            <p class="heading-aside">A practical layer between your attention and the internet’s endless stream of job posts.</p>
-          </div>
-          <div class="capability-grid section-grid">
-            <article class="capability-card"><span class="capability-index">01</span><span class="capability-glyph">⌁</span><h3>Multi-source scanning</h3><p>Run bounded scans across LinkedIn feeds, Indeed, built-in boards, new-grad lanes, and public ATS sources.</p><a href="#workflow">See the route <span>↗</span></a></article>
-            <article class="capability-card"><span class="capability-index">02</span><span class="capability-glyph">◌</span><h3>Job-to-CV evaluation</h3><p>Compare hard constraints and fit evidence without hiding the gaps that should change your decision.</p><a href="#workflow">See the route <span>↗</span></a></article>
-            <article class="capability-card"><span class="capability-index">03</span><span class="capability-glyph">↗</span><h3>Document generation</h3><p>Create role-aware resumes, cover letters, and application answers from your grounded profile and source material.</p><a href="#workflow">See the route <span>↗</span></a></article>
-            <article class="capability-card"><span class="capability-index">04</span><span class="capability-glyph">□</span><h3>Browser-assisted autofill</h3><p>Let the extension map answers into forms while keeping review and submission in your hands.</p><a href="#trust">Read the boundary <span>↗</span></a></article>
-            <article class="capability-card"><span class="capability-index">05</span><span class="capability-glyph">⊙</span><h3>Outcome tracking</h3><p>Connect applications, Gmail signals, interview steps, and follow-ups in one local operator surface.</p><a href="#workflow">See the route <span>↗</span></a></article>
-            <article class="capability-card"><span class="capability-index">06</span><span class="capability-glyph">?</span><h3>Ask Agent</h3><p>Ask questions about your pipeline, launch a scan, inspect a report, or get the next useful action from the system.</p><a href="#operator">Meet the operator <span>↗</span></a></article>
-          </div>
-        </section>
-
-        <section class="section workflow-section" id="workflow" aria-labelledby="workflow-title">
-          <div class="section-heading-row">
-            <div>
-              <div class="section-number">03 / THE WORKFLOW</div>
-              <h2 id="workflow-title">One circuit,<br /><span>four clear moves.</span></h2>
-            </div>
-            <p class="heading-aside">Put your attention on the right opportunities. Give repetitive work to the system. Keep the final call for yourself.</p>
-          </div>
-
-          <div class="workflow-shell">
-            <div class="workflow-tabs" role="tablist" aria-label="RoleCircuit workflow steps">
-              <button class="workflow-tab is-active" role="tab" aria-selected="true" aria-controls="workflow-display" data-step="discover"><span>01</span> Discover</button>
-              <button class="workflow-tab" role="tab" aria-selected="false" aria-controls="workflow-display" data-step="evaluate"><span>02</span> Evaluate</button>
-              <button class="workflow-tab" role="tab" aria-selected="false" aria-controls="workflow-display" data-step="prepare"><span>03</span> Prepare</button>
-              <button class="workflow-tab" role="tab" aria-selected="false" aria-controls="workflow-display" data-step="review"><span>04</span> Review</button>
-            </div>
-            <div class="workflow-display" id="workflow-display" role="tabpanel">
-              <div class="workflow-copy">
-                <span class="mono-label" id="workflow-kicker">STEP 01 / DISCOVER</span>
-                <h3 id="workflow-heading">Find the jobs worth your time.</h3>
-                <p id="workflow-description">RoleCircuit runs scans against your target roles, bringing source, timing, and requirements into one signal board.</p>
-                <a class="text-link" href="#operator">See the operator model <span aria-hidden="true">↗</span></a>
-              </div>
-              <div class="workflow-art" aria-live="polite">
-                <div class="workflow-art-grid"></div>
-                <div class="art-card art-card-main" id="workflow-card-main">
-                  <div class="art-card-top"><span id="art-source">SCAN / LINKEDIN FEED</span><span class="art-live"><i></i> LIVE</span></div>
-                  <div class="art-query"><span>target role</span><strong id="art-query-value">Applied AI Engineer</strong><span class="cursor-bar"></span></div>
-                  <div class="art-divider"></div>
-                  <div class="art-result"><span class="result-badge" id="art-result-badge">NEW</span><span id="art-result-text">14 matching signals collected</span><span class="result-arrow">↗</span></div>
+                <div class="board-row">
+                  <div class="row-main">
+                    <strong>Founding Frontend Engineer</strong>
+                    <span class="row-co">Signal House</span>
+                  </div>
+                  <p class="row-why">They need exactly your 0→1 experience.</p>
                 </div>
-                <div class="art-node art-node-a">role<br /><b>signal</b></div>
-                <div class="art-node art-node-b">cv<br /><b>evidence</b></div>
-                <div class="art-node art-node-c">next<br /><b>move</b></div>
-                <svg class="art-lines" viewBox="0 0 560 360" fill="none" aria-hidden="true"><path d="M116 96C184 78 178 136 244 138"/><path d="M116 258C190 272 188 220 244 214"/><path d="M398 176C442 176 432 282 486 282"/><circle cx="244" cy="138" r="4"/><circle cx="244" cy="214" r="4"/><circle cx="398" cy="176" r="4"/></svg>
+                <div class="board-row row-skip">
+                  <div class="row-main">
+                    <strong>Staff Program Manager</strong>
+                    <span class="row-co">BigCorp</span>
+                  </div>
+                  <p class="row-why">Skipped — not your track, don't spend the hour.</p>
+                </div>
+              </div>
+              <div class="board-footer mono">
+                <span><i class="led"></i>SCANNING LINKEDIN · INDEED · COMPANY BOARDS</span>
+              </div>
+            </div>
+            <div class="board-chip chip-a card" aria-hidden="true"><span class="chip-check">✓</span><span><b>Resume tailored</b><small>for the Northstar role</small></span></div>
+            <div class="board-chip chip-b card" aria-hidden="true"><span class="chip-warm">✉</span><span><b>Recruiter replied</b><small>sorted into your tracker</small></span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MARQUEE ============ -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>NEVER AUTO-SUBMITS <i>◆</i> YOUR DATA STAYS ON YOUR MACHINE <i>◆</i> EVIDENCE-BASED MATCHING <i>◆</i> OPEN SOURCE <i>◆</i> NO ACCOUNT NEEDED <i>◆</i> </span>
+          <span>NEVER AUTO-SUBMITS <i>◆</i> YOUR DATA STAYS ON YOUR MACHINE <i>◆</i> EVIDENCE-BASED MATCHING <i>◆</i> OPEN SOURCE <i>◆</i> NO ACCOUNT NEEDED <i>◆</i> </span>
+        </div>
+      </div>
+
+      <!-- ============ PAINS ============ -->
+      <section class="section pains" id="pains" aria-labelledby="pains-title">
+        <div class="section-head reveal">
+          <span class="section-number mono">SOUND FAMILIAR?</span>
+          <h2 id="pains-title" class="masked">
+            <span class="line"><span class="line-inner">Job hunting became</span></span>
+            <span class="line"><span class="line-inner">a <span class="accent-text">second job.</span></span></span>
+          </h2>
+        </div>
+        <div class="pain-grid">
+          <article class="pain-card card reveal">
+            <span class="pain-glyph" aria-hidden="true">∞</span>
+            <h3>Hours lost to the scroll</h3>
+            <p>LinkedIn, Indeed, company boards, that one aggregator — the same listings, refreshed, again and again.</p>
+          </article>
+          <article class="pain-card card reveal">
+            <span class="pain-glyph" aria-hidden="true">?</span>
+            <h3>Which ones are even worth it?</h3>
+            <p>Every posting reads the same. You guess, apply into the void, and never learn what was a waste of time.</p>
+          </article>
+          <article class="pain-card card reveal">
+            <span class="pain-glyph" aria-hidden="true">▤</span>
+            <h3>The same resume, rewritten</h3>
+            <p>Tweak a bullet, export a PDF, rename the file. Repeat for every single application.</p>
+          </article>
+          <article class="pain-card card reveal">
+            <span class="pain-glyph" aria-hidden="true">▦</span>
+            <h3>Spreadsheet chaos</h3>
+            <p>Where did you apply? Did they reply? When should you follow up? The answer is scattered across inboxes and tabs.</p>
+          </article>
+        </div>
+        <p class="pain-pivot reveal">RoleCircuit turns that into <em>a system that works for you.</em></p>
+      </section>
+
+      <!-- ============ HOW IT WORKS ============ -->
+      <section class="section" id="how" aria-labelledby="how-title">
+        <div class="section-head reveal">
+          <span class="section-number mono">01 / HOW IT WORKS</span>
+          <h2 id="how-title" class="masked">
+            <span class="line"><span class="line-inner">Four steps.</span></span>
+            <span class="line"><span class="line-inner"><span class="accent-text">Zero busywork.</span></span></span>
+          </h2>
+          <p class="section-sub">Set it up once. It scans, shortlists, and prepares — you review and decide.</p>
+        </div>
+
+        <div class="loop-shell reveal">
+          <div class="loop-tabs" role="tablist" aria-label="How RoleCircuit works">
+            <button class="loop-tab is-active" role="tab" aria-selected="true" aria-controls="loop-panel" id="tab-scan" data-step="scan"><span class="mono">01</span>It scans</button>
+            <button class="loop-tab" role="tab" aria-selected="false" aria-controls="loop-panel" id="tab-shortlist" data-step="shortlist" tabindex="-1"><span class="mono">02</span>It shortlists</button>
+            <button class="loop-tab" role="tab" aria-selected="false" aria-controls="loop-panel" id="tab-prepare" data-step="prepare" tabindex="-1"><span class="mono">03</span>It prepares</button>
+            <button class="loop-tab" role="tab" aria-selected="false" aria-controls="loop-panel" id="tab-decide" data-step="decide" tabindex="-1"><span class="mono">04</span>You decide</button>
+            <svg class="loop-circuit" viewBox="0 0 4 440" preserveAspectRatio="none" aria-hidden="true">
+              <line x1="2" y1="0" x2="2" y2="440" class="circuit-trace" />
+              <line x1="2" y1="0" x2="2" y2="440" class="circuit-flow" />
+            </svg>
+          </div>
+
+          <div class="loop-panel card" id="loop-panel" role="tabpanel" aria-labelledby="tab-scan" tabindex="0">
+            <div class="loop-panel-copy">
+              <span class="mono loop-kicker" id="loop-kicker">STEP 01 / IT SCANS</span>
+              <h3 id="loop-heading">Every board, checked hourly.</h3>
+              <p id="loop-description">RoleCircuit watches LinkedIn, Indeed, and thousands of company career pages for you — automatically, every hour. New postings that match what you're after land in one place. You never open twelve tabs again.</p>
+              <div class="loop-tags" id="loop-tags">
+                <span>LinkedIn</span><span>Indeed</span><span>Company boards</span><span>Hourly</span>
+              </div>
+            </div>
+            <div class="loop-art" aria-hidden="true">
+              <svg class="loop-lines" viewBox="0 0 320 220" fill="none">
+                <path class="circuit-trace" d="M10 40 H120 V110 H310" />
+                <path class="circuit-flow" d="M10 40 H120 V110 H310" />
+                <path class="circuit-trace" d="M10 180 H80 V110" />
+                <path class="circuit-flow" d="M10 180 H80 V110" />
+                <circle cx="120" cy="40" r="4" class="node-dot" />
+                <circle cx="120" cy="110" r="4" class="node-dot" />
+                <circle cx="80" cy="180" r="4" class="node-dot" />
+                <circle cx="310" cy="110" r="5" class="node-hot" />
+              </svg>
+              <div class="loop-art-card card">
+                <span class="mono art-kicker" id="art-kicker">WHILE YOU SLEEP</span>
+                <strong id="art-value">Fresh openings, sorted</strong>
+                <span class="art-sub" id="art-sub">waiting in your shortlist by morning</span>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div class="decision-details">
-            <div><span class="detail-label">INPUT</span><strong>Your profile + a real posting</strong><p>CV, target roles, constraints, and the source material behind the opportunity.</p></div>
-            <div><span class="detail-label">WHAT IT CHECKS</span><strong>Fit, friction, and evidence</strong><p>Hard gates, strong matches, missing proof, sponsorship signals, and next actions.</p></div>
-            <div><span class="detail-label">OUTPUT</span><strong>A decision you can explain</strong><p>Reviewable artifacts, a prepared application, or a clear reason to move on.</p></div>
+      <!-- ============ AUTOFILL SHOWCASE ============ -->
+      <section class="section autofill-section" id="autofill" aria-labelledby="autofill-title">
+        <div class="autofill-grid">
+          <div class="autofill-copy reveal">
+            <span class="section-number mono">02 / BROWSER EXTENSION</span>
+            <h2 id="autofill-title" class="masked">
+              <span class="line"><span class="line-inner">The form fills itself.</span></span>
+              <span class="line"><span class="line-inner"><span class="accent-text">You keep the pen.</span></span></span>
+            </h2>
+            <p class="section-sub">
+              The RoleCircuit Chrome extension fills application forms on the major hiring platforms —
+              Greenhouse, Lever, Workday and more — using your own answer bank. It types your details,
+              picks sensible defaults for the awkward questions, and then stops. It never clicks submit.
+            </p>
+            <ul class="autofill-facts">
+              <li><span class="fact-icon">✓</span>Your details, filled from your answer bank</li>
+              <li><span class="fact-icon">✓</span>EEO questions answered "Decline to self-identify" by default</li>
+              <li><span class="fact-icon">✓</span>If a form changes, it adapts and keeps going</li>
+              <li><span class="fact-icon hand">☝</span>Submit is always, only, your click</li>
+            </ul>
           </div>
-        </section>
 
-        <section class="trust-section section-grid" id="trust" aria-labelledby="trust-title">
-          <div class="trust-copy">
-            <div class="section-number">04 / THE BOUNDARY</div>
-            <h2 id="trust-title">Automation with<br /><em>an accountable edge.</em></h2>
-            <p>Job-search material is personal. RoleCircuit treats it as personal infrastructure: local-first, user-owned, and transparent by default.</p>
-            <a class="button button-dark" href="#operator">How the runtime fits <span aria-hidden="true">↗</span></a>
-          </div>
-          <div class="trust-list">
-            <div class="trust-item"><span class="trust-symbol">◉</span><div><h3>Your data stays yours</h3><p>CVs, profiles, answer banks, scan output, and application records live in your own files by default.</p></div><span class="trust-check">01</span></div>
-            <div class="trust-item"><span class="trust-symbol">⌁</span><div><h3>Evidence before confidence</h3><p>Every meaningful score can point back to the posting and your experience. No unexplained model verdicts.</p></div><span class="trust-check">02</span></div>
-            <div class="trust-item"><span class="trust-symbol">□</span><div><h3>Never submits for you</h3><p>RoleCircuit can assist with form filling, but it does not click submit, send messages, or act without your confirmation.</p></div><span class="trust-check">03</span></div>
-          </div>
-        </section>
+          <div class="form-showcase reveal" aria-hidden="true">
+            <div class="form-card card" id="form-card">
+              <div class="form-header">
+                <span class="mono">APPLICATION · GREENHOUSE</span>
+                <span class="form-ext-badge"><i class="led"></i>RoleCircuit extension</span>
+              </div>
 
-        <section class="operator-section section-grid" id="operator" aria-labelledby="operator-title">
-          <div class="operator-head">
-            <div class="section-number">05 / THE OPERATOR MODEL</div>
-            <h2 id="operator-title">A small local stack<br /><span>with a clear job.</span></h2>
-          </div>
-          <div class="operator-map">
-            <div class="operator-step"><span class="operator-number">01</span><span class="operator-icon">▦</span><h3>Desktop app</h3><p>A focused cockpit for scans, reports, tracker state, settings, and daily review.</p></div>
-            <div class="operator-connector">→</div>
-            <div class="operator-step"><span class="operator-number">02</span><span class="operator-icon">⌘</span><h3>Local bridge</h3><p>A small runtime on your machine that routes evaluation, storage, and safe operator actions.</p></div>
-            <div class="operator-connector">→</div>
-            <div class="operator-step"><span class="operator-number">03</span><span class="operator-icon">□</span><h3>Browser extension</h3><p>A page-level assistant that captures context and fills forms without taking over the decision.</p></div>
-          </div>
-        </section>
+              <div class="form-field" data-field="name">
+                <label class="mono">FULL NAME</label>
+                <div class="form-input"><span class="field-value"></span><span class="field-caret"></span></div>
+                <span class="filled-chip">✦ filled by RoleCircuit</span>
+              </div>
 
-        <section class="closing-section" id="contact" aria-labelledby="closing-title">
-          <div class="closing-grid">
-            <div class="closing-copy">
-              <div class="section-number">06 / NEXT CIRCUIT</div>
-              <h2 id="closing-title">Keep the signal.<br /><span>Make the move.</span></h2>
-              <p>Explore the open-source runtime, follow the product direction, and see how a deliberate job search can become a system you own.</p>
-              <div class="closing-actions"><a class="button button-primary" href="https://github.com/hankchen1874-hub/RoleCircuit.github.io" target="_blank" rel="noreferrer">Explore the repository <span aria-hidden="true">↗</span></a><a class="text-link" href="#capabilities">Review capabilities <span aria-hidden="true">↓</span></a></div>
+              <div class="form-field" data-field="email">
+                <label class="mono">EMAIL</label>
+                <div class="form-input"><span class="field-value"></span><span class="field-caret"></span></div>
+                <span class="filled-chip">✦ filled by RoleCircuit</span>
+              </div>
+
+              <div class="form-field" data-field="why">
+                <label class="mono">WHY THIS ROLE?</label>
+                <div class="form-input form-textarea"><span class="field-value"></span><span class="field-caret"></span></div>
+                <span class="filled-chip">✦ filled by RoleCircuit</span>
+              </div>
+
+              <div class="form-field" data-field="eeo">
+                <label class="mono">GENDER (EEO)</label>
+                <div class="form-input form-select"><span class="field-value"></span><span class="select-arrow">⌄</span></div>
+                <span class="filled-chip">✦ safe default</span>
+              </div>
+
+              <div class="form-submit-row">
+                <span class="form-submit" id="form-submit">Submit application</span>
+                <span class="submit-note" id="submit-note">☝ You click this.</span>
+              </div>
+
+              <div class="form-cursor" id="form-cursor">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="#141712"><path d="M4 2l16 9.5-7 1.8-3.4 6.7z"/></svg>
+              </div>
             </div>
-            <div class="closing-diagram" aria-hidden="true">
-              <div class="diagram-ring ring-a"></div><div class="diagram-ring ring-b"></div><div class="diagram-ring ring-c"></div>
-              <div class="diagram-core"><span class="brand-mark"><i></i><i></i><i></i></span><b>RC</b></div>
-              <span class="diagram-label label-one">discover</span><span class="diagram-label label-two">decide</span><span class="diagram-label label-three">move</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SIGNAL RADAR ============ -->
+      <section class="section radar-section" id="radar" aria-labelledby="radar-title">
+        <div class="radar-grid">
+          <div class="radar-viz reveal" aria-hidden="true">
+            <div class="radar-scope">
+              <div class="radar-ring r1"></div>
+              <div class="radar-ring r2"></div>
+              <div class="radar-ring r3"></div>
+              <div class="radar-cross-h"></div>
+              <div class="radar-cross-v"></div>
+              <div class="radar-sweep"></div>
+              <span class="blip b1"></span>
+              <span class="blip b2"></span>
+              <span class="blip b3"></span>
+              <div class="radar-tag tag-a mono">FUNDING ROUND<br /><b>TEAM GROWING</b></div>
+              <div class="radar-tag tag-b mono">FOUNDER CHATTER<br /><b>WATCH</b></div>
+            </div>
+            <div class="radar-readout mono card">
+              <span><i class="led"></i>ALERT SENT TO YOUR TELEGRAM</span>
             </div>
           </div>
-        </section>
-      </main>
+          <div class="radar-copy reveal">
+            <span class="section-number mono">03 / SIGNAL RADAR</span>
+            <h2 id="radar-title" class="masked">
+              <span class="line"><span class="line-inner">Know who's hiring</span></span>
+              <span class="line"><span class="line-inner"><span class="accent-text">before the job is posted.</span></span></span>
+            </h2>
+            <p class="section-sub">
+              By the time a posting goes live, hundreds apply. RoleCircuit watches the signals that come
+              first — funding announcements, regulatory filings, founder chatter — and alerts you days
+              before the role exists. You show up before the crowd.
+            </p>
+            <ul class="radar-facts">
+              <li><span class="mono">WATCHES</span> Funding rounds &amp; company filings</li>
+              <li><span class="mono">WATCHES</span> Founder &amp; team hiring chatter</li>
+              <li><span class="mono">ALERTS</span> Straight to your Telegram, days early</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-      <footer class="site-footer">
-        <div class="footer-brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>RoleCircuit</span></div>
-        <div class="footer-legal"><strong>OVRENI, LLC</strong><span>Delaware LLC</span><address>1300 South Blvd STE 32652<br />Charlotte, NC 28203 · United States</address></div>
-        <p>Built for deliberate moves. © 2026 OVRENI, LLC.</p>
-        <div class="footer-links"><a href="https://github.com/hankchen1874-hub/RoleCircuit.github.io" target="_blank" rel="noreferrer">GitHub ↗</a><a href="#trust">Privacy by design</a></div>
-      </footer>
-    </div>
+      <!-- ============ APPLY WITH RECEIPTS ============ -->
+      <section class="section" id="receipts" aria-labelledby="receipts-title">
+        <div class="receipts-grid">
+          <div class="receipts-copy reveal">
+            <span class="section-number mono">04 / EVIDENCE, NOT VIBES</span>
+            <h2 id="receipts-title" class="masked">
+              <span class="line"><span class="line-inner">Apply with receipts.</span></span>
+              <span class="line"><span class="line-inner"><span class="accent-text">Skip with reasons.</span></span></span>
+            </h2>
+            <p class="section-sub">
+              No black-box scores. For every role, RoleCircuit shows what the posting asks for next to
+              the line of your own experience that answers it — and it's just as honest about what
+              doesn't fit, so you can skip without second-guessing.
+            </p>
+          </div>
+          <div class="receipts-card card reveal" aria-label="Example of how RoleCircuit explains why a role fits">
+            <span class="mono receipts-label">WHY THIS FITS — SENIOR PRODUCT ENGINEER</span>
+            <div class="receipt-row">
+              <span class="receipt-check ok">✓</span>
+              <div><b>"Design systems experience"</b><small>your work: built the component library used by 4 teams</small></div>
+            </div>
+            <div class="receipt-row">
+              <span class="receipt-check ok">✓</span>
+              <div><b>"Ships fast with AI tooling"</b><small>your work: built an AI eval harness, shipped to prod</small></div>
+            </div>
+            <div class="receipt-row">
+              <span class="receipt-check ok">✓</span>
+              <div><b>"Strong TypeScript"</b><small>your work: 3 years of production TypeScript</small></div>
+            </div>
+            <div class="receipt-row is-gap">
+              <span class="receipt-check gap">!</span>
+              <div><b>"On-call ownership"</b><small>honest gap: your profile shows no on-call history — address it in the cover letter</small></div>
+            </div>
+            <div class="receipts-footer mono">EVERY CLAIM CITES YOUR OWN EXPERIENCE</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TRACKING ============ -->
+      <section class="section tracking-section" id="tracking" aria-labelledby="tracking-title">
+        <div class="section-head reveal">
+          <span class="section-number mono">05 / NEVER LOSE TRACK</span>
+          <h2 id="tracking-title" class="masked">
+            <span class="line"><span class="line-inner">Every application,</span></span>
+            <span class="line"><span class="line-inner"><span class="accent-text">one timeline.</span></span></span>
+          </h2>
+          <p class="section-sub">Hook up your Gmail and replies sort themselves. Interviews land in one view. And when something's about to go cold, you get a nudge — with a follow-up already drafted.</p>
+        </div>
+
+        <div class="timeline reveal" id="timeline" aria-label="Example application timeline">
+          <div class="timeline-line" aria-hidden="true"><span class="timeline-line-fill"></span></div>
+          <div class="timeline-item">
+            <span class="timeline-dot dot-lime" aria-hidden="true"></span>
+            <div class="timeline-body card">
+              <span class="mono">APPLIED · MON</span>
+              <b>Senior Product Engineer — Northstar Labs</b>
+              <small>form autofilled · you reviewed &amp; submitted</small>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot dot-lime" aria-hidden="true"></span>
+            <div class="timeline-body card">
+              <span class="mono">REPLY · WED</span>
+              <b>Recruiter answered — sorted automatically</b>
+              <small>Gmail hooked up once; no digging through inbox</small>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot dot-warm" aria-hidden="true"></span>
+            <div class="timeline-body card">
+              <span class="mono">INTERVIEW · FRI 10:00</span>
+              <b>On your calendar, prep notes attached</b>
+              <small>generated from the posting + your experience</small>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot dot-ink" aria-hidden="true"></span>
+            <div class="timeline-body card">
+              <span class="mono">NUDGE · NEXT WEEK</span>
+              <b>Signal House went quiet — follow up?</b>
+              <small>a polite nudge, already drafted for you</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PRIVACY ============ -->
+      <section class="section privacy-section" id="privacy" aria-labelledby="privacy-title">
+        <div class="privacy-inner">
+          <div class="section-head reveal">
+            <span class="section-number mono">06 / WHY LOCAL MATTERS</span>
+            <h2 id="privacy-title" class="masked">
+              <span class="line"><span class="line-inner">Your career data</span></span>
+              <span class="line"><span class="line-inner"><span class="accent-text">never leaves your machine.</span></span></span>
+            </h2>
+          </div>
+          <div class="privacy-grid">
+            <article class="privacy-card reveal">
+              <span class="privacy-num mono">01</span>
+              <h3>Runs where you live</h3>
+              <p>No account, no cloud, no telemetry. Your resume, your applications, your replies — stored on your machine, not on someone's server.</p>
+            </article>
+            <article class="privacy-card reveal">
+              <span class="privacy-num mono">02</span>
+              <h3>Open to inspection</h3>
+              <p>Fully open source under the MIT license. Read every line, audit what it does with your data, change what you don't like.</p>
+            </article>
+            <article class="privacy-card reveal">
+              <span class="privacy-num mono">03</span>
+              <h3>Never acts without you</h3>
+              <p>It fills forms but never submits them. It drafts messages but never sends them. Every irreversible action is yours alone.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CLOSING CTA ============ -->
+      <section class="closing" id="closing" aria-labelledby="closing-title">
+        <div class="closing-ring" aria-hidden="true">
+          <div class="ring ring-a"></div>
+          <div class="ring ring-b"></div>
+          <div class="ring-core"></div>
+        </div>
+        <div class="closing-inner reveal">
+          <span class="section-number mono">READY WHEN YOU ARE</span>
+          <h2 id="closing-title" class="masked">
+            <span class="line"><span class="line-inner">Your next role,</span></span>
+            <span class="line"><span class="line-inner"><span class="accent-text">minus the grind.</span></span></span>
+          </h2>
+          <p>Free, open source, and running on your machine in minutes.</p>
+          <div class="closing-actions">
+            <a class="button button-primary magnetic" href="https://github.com/hankchen1874-hub/RoleCircuit.github.io" target="_blank" rel="noreferrer">Get RoleCircuit on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button button-ghost magnetic" href="#privacy">Why it's private <span aria-hidden="true">↑</span></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 28 28" width="20" height="20" fill="none">
+            <circle cx="14" cy="14" r="12.5" stroke="currentColor" stroke-width="1.6" />
+            <circle cx="14" cy="14" r="4.5" fill="#65a30d" />
+            <path d="M14 1.5v6M14 20.5v6M1.5 14h6M20.5 14h6" stroke="#65a30d" stroke-width="1.6" />
+          </svg>
+        </span>
+        <span>RoleCircuit</span>
+      </div>
+      <div class="footer-legal">
+        <strong>OVRENI, LLC</strong>
+        <span>Delaware LLC</span>
+        <address>1300 South Blvd STE 32652<br />Charlotte, NC 28203 · United States</address>
+      </div>
+      <p>© 2026 OVRENI, LLC.</p>
+      <div class="footer-links">
+        <a href="https://github.com/hankchen1874-hub/RoleCircuit.github.io" target="_blank" rel="noreferrer">GitHub ↗</a>
+        <a href="#privacy">Why local</a>
+      </div>
+    </footer>
   </body>
 </html>
